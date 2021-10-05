@@ -114,6 +114,8 @@
             <div id="second-bar">
 
                 <span class = below-bar></span>
+                <p><h1>Welcome to K Files</h1></p>
+                <p><h2>In Search of Truth</h2></p>
                 
 
              </div>   
