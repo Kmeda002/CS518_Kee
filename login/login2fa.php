@@ -12,7 +12,7 @@
 
 	$digits = 4;
 	$authcode = rand(pow(10, $digits-1), pow(10, $digits)-1);
-	echo "2fa code is ",$authcode,"<br>";
+	//echo "2fa code is ",$authcode,"<br>";
 
 	$mail->Body = "Snoopes 2FA Code - " . strval($authcode);
 	//$mail->AltBody = "This is the plain text version of the email content";

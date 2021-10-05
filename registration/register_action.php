@@ -58,7 +58,7 @@ if($_POST){
 
     $mail->Subject = "Snoopes Verf Email";
 
-    $mail->Body = "<a href='localhost/verify_email?email=$email&code=$verfcode'>Click Here to Verify your Email</a>";
+    $mail->Body = "<a href='localhost/verify_email.php?email=$email&code=$verfcode'>Click Here to Verify your Email</a>";
     //$mail->AltBody = "This is the plain text version of the email content";
     //echo "Sending email to ". $email . "<br>";
 
