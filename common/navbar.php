@@ -4,9 +4,9 @@
       <a class="navbar-brand" href="#">Snopes</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="../home.php">Home</a></li>
+      <li class="active"><a href="/home.php">Home</a></li>
       <?php if ($_SESSION["user_type"] == 0) { ?>
-      	<li><a href="../admin/admin_approval.php">Pending Requests</a></li>
+      	<li><a href="/admin/admin_approval.php">Pending Requests</a></li>
       <?php } ?>
       <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Account Settings

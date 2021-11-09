@@ -1,9 +1,12 @@
 <?php 
-	session_start();
-	if($_GET) {
-		$_SESSION["email"] = $_GET['email'];
-		$_SESSION["user_type"] = $_GET['user_type'];
-	}
+  ini_set('display_errors', '1');
+  ini_set('display_startup_errors', '1');
+  error_reporting(E_ALL);
+  session_start();
+  if($_GET) {
+    $_SESSION["email"] = $_GET['email'];
+    $_SESSION["user_type"] = $_GET['user_type'];
+  }
 ?>
 
 <!DOCTYPE html>
@@ -19,13 +22,19 @@
 <body>
 
 <?php 
+  use Elasticsearch\ClientBuilder;
   require_once "common/navbar.php"; 
-  require_once "common/config.php"; 
-  //require_once "verf_email.php"
+  require_once "common/config.php";
+  require 'vendor/autoload.php';
+  $hosts = [
+    'host' => 'localhost',
+    'port' => '9200'
+  ]; 
+  $client = Elasticsearch\ClientBuilder::create()->setHosts($hosts)->build();
 ?>
   
 <div class="container">
-  <h3>Search Articles</h3>
+  <h2>Search Articles</h2>
   <?php 
     $email = $_SESSION["email"]; 
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -36,12 +45,52 @@
       echo "Your email is not Verified, <button type='button' id='verifyemail' class='btn btn-primary'>Click</button> to send Verification Email. <br><br>";
     }
   ?>
-  <form class="form-horizontal">
-  <div class="col-sm-10">
-  <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-</div>
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
+  <form class="form-horizontal" action="" method="POST" >
+    <div class="col-sm-10">
+      <input class="form-control mr-sm-2" type="search" name= "k" value="<?php echo isset($_POST['k']) ? $_POST['k'] : ''; ?>" placeholder="Search" aria-label="Search">
+    </div>
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    <br>
+  </form>
+  <div class = "border border-3 rounded-3">
+    <?php 
+    if(isset($_POST['k'])){
+      if (strlen($_POST['k']) < 1) {
+        $json = '{
+          "size": 50,
+          "query" : {
+              "match_all" : {}
+          }
+        }';
+      }
+      else {
+        echo "<h4>Searched for : ", $_POST['k'], "</h4>";
+        $json = '{
+          "size": 50,
+          "query" : {
+              "multi_match" : {
+                  "query": "' .$_POST['k']. '",
+                  "fields": ["title", "body"]
+              }
+          }
+        }';
+      }
+      //print_r($json);
+      $params = [
+        'index' => 'snopesprod',
+        'body'  => $json
+      ];
+      $results = $client->search($params);
+      echo "<h4>", $results['hits']['total']['value'], " results", "</h4>";
+      echo "<br>";
+      foreach ($results['hits']['hits'] as $hit) {
+        //print_r($hit);
+        ?>
+        <a class="btn" target="_blank" href="compare2.php?artid=<?php echo $hit['_source']['id']?>" role="button"><?php echo $hit['_source']['title'];?></a><br>
+      <?php }
+    }
+    ?>
+  </div>
 </div>
 <script type="text/javascript">
   $("#verifyemail").click(function(e) {
