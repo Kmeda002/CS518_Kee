@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Nov 09, 2021 at 09:28 AM
+-- Generation Time: Dec 07, 2021 at 07:42 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.0.12
 
@@ -20,8 +20,25 @@ SET time_zone = "+00:00";
 --
 -- Database: `snoops_dev`
 --
-CREATE DATABASE IF NOT EXISTS `snoops_dev` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
-USE `snoops_dev`;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `api_keys`
+--
+
+CREATE TABLE `api_keys` (
+  `email_id` varchar(30) NOT NULL,
+  `api_key` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `api_keys`
+--
+
+INSERT INTO `api_keys` (`email_id`, `api_key`) VALUES
+('kmeda002@odu.edu', 'zfiz8u1tythjqbapwpth'),
+('kavya.meda1@gmail.com', 'geu0rsju9c5gvek15dun');
 
 -- --------------------------------------------------------
 
@@ -558,6 +575,29 @@ INSERT INTO `papers` (`fake_artid`, `paper_id`, `title`, `year`, `venue`, `citat
 (50, 'b0bb24082fd5e36dbdbe7beb12b269134507a218', 'We\'re drinking 5% more than in 2015, says Alcohol Action Ireland.', '2017', '', 0, 'Irish people drank an average of 5% more alcohol last year than the previous year, according to an analysis of official figures by Alcohol Action Ireland........', 'C. O\'Keeffe'),
 (50, 'a65cc315bc1ccca0643d16dd303c2132628a052a', 'Understanding standard drinks and drinking guidelines.', '2012', 'Drug and alcohol review', 130, 'INTRODUCTION AND AIMS\nFor consumers to follow drinking guidelines and limit their risk of negative consequences they need to track their ethanol consumption. This paper reviews published research on the ability of consumers to utilise information about the alcohol content of beverages when expressed in different forms, for example in standard drinks or units versus percentage alcohol content.\n\n\nDESIGN AND METHODS\nA review of the literature on standard drink definitions and consumer understanding of these, actual drink pouring, use of standard drinks in guidelines and consumer understanding and use of these.\n\n\nRESULTS\nStandard drink definitions vary across countries and typically contain less alcohol than actual drinks. Drinkers have difficulty defining and pouring standard drinks with over-pouring being the norm such that intake volume is typically underestimated. Drinkers have difficulty using percentage alcohol by volume and pour size information in calculating intake but can effectively utilise standard drink labelling to track intake. Standard drink labelling is an effective but little used strategy for enabling drinkers to track their alcohol intake and potentially conform to safe or low-risk drinking guidelines.', 'W. Kerr, T. Stockwell'),
 (50, 'a2a9134e96eca68770c43bb759eb7c8cada8ea37', 'The Downside of Drinking', '2020', '', 0, 'This chapter addresses five potential reasons as to why alcohol, an ancient substance, seems to have become newly hazardous. First, the alcohol industry continues to be powerful and savvy. Industry advertising never says that alcohol is not addictive; rather, the message is “use responsibly,” which implies that alcohol’s use—unlike the use of drugs—is controllable. Second, although the proportion of Americans drinking has remained steady at about two in three people over the past 70 years, Americans are drinking more, and more easily. Third, during this decade of economic expansion, many Americans have more income. In contrast to the stereotype, affluent people are more likely to drink than low-income people. Fourth, binge-drinking is now a rite of passage in college. With women a growing percentage of collegiate heavy drinkers, and with alcohol-makers targeting women with sweeter and fizzier products, health risks accumulate among women, who generally experience greater alcohol effects at lower doses than men. Fifth, Americans have become complacent about driving under the influence, because seatbelts and safer cars have lowered alcohol-related fatalities. Yet, paradoxically, alcohol-related traffic accidents are on the rise. Consuming less alcohol in total or on a per-occasion basis would probably improve the health of most people. That is a credible and reasonable public health goal.', 'M. Stein, S. Galea');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `survey_questions`
+--
+
+CREATE TABLE `survey_questions` (
+  `email_id` varchar(30) NOT NULL,
+  `art_id` int(11) NOT NULL,
+  `answers` char(5) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `survey_questions`
+--
+
+INSERT INTO `survey_questions` (`email_id`, `art_id`, `answers`) VALUES
+('kmeda002@odu.edu', 21, 'aacdd'),
+('raviyyaahhoo@gmail.com', 21, 'aaaab'),
+('raviyyaahhoo@gmail.com', 23, 'caaaa'),
+('kmeda002@odu.edu', 10, 'aabbd'),
+('kmeda002@odu.edu', 45, 'aabbc');
 
 -- --------------------------------------------------------
 
