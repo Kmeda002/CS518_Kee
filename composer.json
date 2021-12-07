@@ -1,6 +1,7 @@
 {
     "require": {
         "phpmailer/phpmailer": "^6.5",
-	"elasticsearch/elasticsearch": "^7.0"
+	"elasticsearch/elasticsearch": "^7.0",
+        "mekras/php-speller": "^2.1"
     }
 }
